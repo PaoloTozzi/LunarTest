@@ -32,15 +32,20 @@ class CreateNewUser implements CreatesNewUsers
             'password' => $this->passwordRules(),
         ])->validate();
 
-        Customer::create([
-            'first_name' =>  $input['name'],
-            'last_name' =>  $input['last_name'],
+        $customer = Customer::create([
+            'first_name' => $input['name'],
+            'last_name' => $input['last_name'],
         ]);
 
-        return User::create([
+
+        $user = User::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
         ]);
+
+        $customer->users()->attach($user);
+
+        return $user;
     }
 }

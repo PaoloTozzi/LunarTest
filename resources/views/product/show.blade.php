@@ -4,10 +4,11 @@
             <div class="col-12 col-md-5">
                 <img src="{{ $product->media->first()->getUrl()}}" class="img-fluid" alt="">
             </div>
+            {{-- @dd(gettype($product->prices()->first()->price->value)) --}}
             <div class="col-12 col-md-5">
                 <h5>{{ $product->translateAttribute('name') }}</h5>
                 <span class="text-danger">{!! $product->translateAttribute('description') !!}</span>
-                <p class="text-danger">{{ $product->prices()->first()->price }}$</p>
+                <p class="text-danger">{{ $product->prices()->first()->price->formatted() }}</p>
                 <form action="{{route('checkout', compact('product'))}}" method="post">
                     @csrf
                     <button>Acquista</button>

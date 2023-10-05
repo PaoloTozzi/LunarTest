@@ -1,5 +1,7 @@
 email= admin@test.it  
 password = 12345678
+Permesso per il super admin
+
 Aggiungere al localhost :8000
 
 <!--* Per ricevere i dati in ingresso dei campi precostruiti devo usare il metodo translateAttribute('nome dato')  -->
@@ -16,9 +18,8 @@ Aggiungere al localhost :8000
 
 <!-- TODO -->
 
-Aggiungere Stripe
 Ad acquisto effettuato inviare una mail all'utente
-Testare ricerca con MeiliSearch https://github.com/meilisearch/meilisearch-php/
+
 
 <!--! Problemi -->
 Lato hub risulta un po' lento e macchinoso
@@ -27,7 +28,31 @@ la descrizione non può cambiare di colore in quanto riceve già un {!! !!} con 
 <!--*  -->
 Mi fa usare livewire 2, probabilmente dovuto al fatto che la parte hub che viene pre salvata ha livewire 2
 
+
+        $customer = Customer::create([
+            'first_name' => $input['name'],
+            'last_name' => $input['last_name'],
+        ]);
+
+
+        $user = User::create([
+            'name' => $input['name'],
+            'email' => $input['email'],
+            'password' => Hash::make($input['password']),
+        ]);
+
+        $customer->users()->attach($user);
+
+        return $user;
+
+Per linkare l'utente all'hub
+
+per la ricerca usare algolia e al momento dell'import scrivere php artisan scout:import "\Lunar\Models\Product"
+
 Posso usare una named route per accedere alla dashoboard non come Nova
 ----------------------------------------------------------------------------------------------------------------------------------
 
 sk_test_51NiZskB5c4rV0qlyUvL9KFTnRcgpvofJRycXFu46lvjsg8oweSyioLiOOYBDDNkKLQuD3Nb8waJPXupfdBKMqup600kWTcuYvfs
+
+
+composer dump-autoload controlla tutti i file delle librerie realmente installate

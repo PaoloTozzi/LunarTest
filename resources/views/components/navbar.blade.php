@@ -35,10 +35,11 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                    <a href="{{route('formUpdateInfo')}}" class="nav-link">Aggiorna info</a>
                 </li>
             </ul>
-            <form class="d-flex" role="search">
+            <form method="GET" action="{{route('searchProducts')}}" class="d-flex" role="search">
+                @csrf
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
